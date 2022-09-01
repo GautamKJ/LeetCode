@@ -15,6 +15,6 @@ public:
         
         int n=nums.size();
         vector<int>dp(n+1,-1);
-        return max(solve(nums,0,n,dp),solve(nums,1,n,dp));
+        return solve(nums,0,n,dp);
     }
 };
