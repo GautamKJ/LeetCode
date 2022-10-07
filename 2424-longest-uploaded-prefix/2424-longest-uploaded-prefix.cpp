@@ -1,27 +1,32 @@
 class LUPrefix {
 public:
-   map<int,int>arr;
+   int arr[100000]={0};
     int len;
     int a =0;
     int x =0; 
+    int  ans;
     LUPrefix(int n) {
         len=n;
+        ans=0;
     }
     
     void upload(int video) {
-        arr[video]++;
-
-            while(arr[x+1]>0)x++;
-            a = x ;
-        
+        arr[video-1]=1;
+        // for(int i =0;i<len ; i++){
+        //     while(arr[x]!=0)x++;
+        //     a = x ;
+        // }
+         for(int i=ans;i<len;i++){
+            if(arr[i]==0)
+                break;
+            ans++;
+        }
         
     }
     
     int longest() {
-        int  ans=0;
-       
         
-        return a;
+                return ans;
     }
 };
 
