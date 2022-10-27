@@ -24,28 +24,38 @@ public:
             if(mp[a[i].second]==1)cnt++;
             
             if(cnt==k){
-                // cout<<"cnt "<<cnt<<endl;
+              
                 if(a[i].first-a[j].first+1<mini){
                     mini=a[i].first-a[j].first+1;
-                  ans={a[i].first,a[j].first};
+                    ans={a[i].first,a[j].first};
                 }
-                while(cnt==k){
+                while(cnt==k && j<a.size()){
                     
-                    if(mp[a[j].second]>1)
-                        mp[a[j].second]--;
+                    if(mp[a[j].second]>=1)
+                    {  mp[a[j].second]--;
+                   
+                     }
+                     
+                
+                    if(mp[a[j].second]==0)
+                    { 
+                        cnt--;
+                     }
                     
-                    else 
-                        break;
                     j++;
+                
                         
                 }
                 
-                 if(a[i].first-a[j].first+1<mini){
-                    mini=a[i].first-a[j].first+1;
-                   ans={a[i].first,a[j].first};
-                }
+                int l=j-1;
+                 if(a[i].first-a[l].first+1<mini){
+                     mini=a[i].first-a[l].first+1;
+                     ans={a[i].first,a[l].first};
+                
+                
             }
             
+        }
         }
         return ans;
         
