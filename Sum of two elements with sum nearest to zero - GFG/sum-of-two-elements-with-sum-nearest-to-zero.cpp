@@ -17,13 +17,8 @@ class Solution
                 while(l<=h){
                     int mid=l+(h-l)/2;
                     // cout<<"ans "<<mx<<"  "<<ans<<endl;
-                    if(mid!=index && arr[mid]+ele==0){
-                        mx=min(mx,0);
-                        ans=0;
-                        break;
-                    }
-                    else if(mid!=index && arr[mid]+ele>=mx){
-                       if(mx>=abs(arr[mid]+ele))
+                    
+                     if(mid!=index && mx>=abs(arr[mid]+ele))
                         {
                             mx=abs(arr[mid]+ele);
                             if(ans==abs(arr[mid]+ele))
@@ -31,20 +26,20 @@ class Solution
                              else 
                              ans=arr[mid]+ele;
                         }
+                    
+                    if(mid!=index && arr[mid]+ele==0){
+                        mx=min(mx,0);
+                        ans=0;
+                        break;
+                    }
+                    else if(mid!=index && arr[mid]+ele>=mx){
+                      
                         h=mid-1;
                     }
                      else if(mid!=index && arr[mid]+ele<mx)
                     { 
                         l=mid+1;
                         
-                        if(mx>abs(arr[mid]+ele))
-                        {
-                            mx=abs(arr[mid]+ele);
-                            if(ans==abs(arr[mid]+ele))
-                             ans=max(ans,arr[mid]+ele);    
-                             else 
-                             ans=arr[mid]+ele; 
-                        }
                        
                     }
                     else if(abs(ele+arr[l]) >= abs(ele+arr[h])){
