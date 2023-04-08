@@ -29,14 +29,35 @@ int MOD=1e9+7;
     
     return dp[i][sum]=ans%MOD;
 }
+
+int solveTab(int arr[], int n, int sum){
+    vector<vector<int>>dp(n+1,vector<int>(sum+1,0));
+    
+    dp[n][0]=1;
+    
+    for(int i=n-1;i>=0;i--)
+    {
+        
+        for(int s=0;s<=sum;s++)
+        {
+            int ans=0;
+            if(s-arr[i]>=0)
+         ans+=dp[i+1][s-arr[i]];
+         ans+=dp[i+1][s];
+         
+         dp[i][s]=ans%MOD;
+        }
+    }
+    return dp[0][sum];
+}
 	int perfectSum(int arr[], int n, int sum)
 	{
 	  
-	  vector<vector<int>>dp(n,vector<int>(sum+1,-1));
-	    
-	    int cnt=solve(arr,0,n,sum,dp)%MOD;
-	  
-        return cnt;
+// 	  vector<vector<int>>dp(n,vector<int>(sum+1,-1));
+	   // int cnt=solve(arr,0,n,sum,dp)%MOD;
+        // return cnt;
+        
+        return solveTab(arr,n,sum)%MOD;
 	}
 	  
 };
