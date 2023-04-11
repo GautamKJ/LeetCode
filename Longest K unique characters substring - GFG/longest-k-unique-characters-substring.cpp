@@ -11,48 +11,39 @@ class Solution{
   public:
     int longestKSubstr(string s, int k) {
     
-        unordered_map<char,int>m,temp;
+      int i=0,j=0;
+      int ans=-1;
+      int dist_ele=0;
+      unordered_map<char,int>mp;
+      while(i<s.size())
+      {
+          mp[s[i]]++;
+          
+          if(mp[s[i]]==1)
+            dist_ele++;
         
-        for(int i=0;i<s.size();i++){
-            m[s[i]]++;
-            temp[s[i]]++;
-        }
-        // a--> 3
-        // b--> 4
-        // c--> 1
-        // e--> 3
-        int j=0;
-        int i=0;
-        int c=k;
-        int len=-1;
-        while(i<s.size())
-        {
-            temp[s[i]]--;
-            if(temp[s[i]]+1==m[s[i]])
+        
+            if(dist_ele>k)
             {
-                c--;
+                ans=max(ans,i-j);
                 
-            }
-            while(c<0){
-                
-                len=max(len,i-j);
-                
-                temp[s[j]]++;
-                if(temp[s[j]]==m[s[j]])
-                    {c++;
+                while(dist_ele>k)
+                {
+                    mp[s[j]]--;
                     
-                    }
+                    if(mp[s[j]]==0)
+                        dist_ele--;
                     
-                j++;
+                    j++;
+                }
             }
-            i++;
-            
-            
-        }
-        if(c==0)
-        len=max(len,i-j);
-    
-    return len;
+
+          i++;
+      }
+      if(dist_ele==k)
+                ans=max(ans,i-j);
+                
+        return ans;                
     }
 };
 
