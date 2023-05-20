@@ -29,11 +29,36 @@ class Solution {
         }
         return dp[step]=res;
   }
+  int solveTab(vector<int>& height, int n, int k)
+  {
+       vector<int>dp(n,0);
+       
+       for(int step=n-1;step>=0;step--)
+       { 
+           int res=INT_MAX;
+        for(int i=1;i<=k;i++)
+        {
+            int idx=step+i;
+            if(idx>=n)
+                break;
+            int cost=0;
+            if(idx<n)
+            cost=abs(height[idx]-height[step]);
+            
+            res=min(res,cost+solve(height,idx,n,k,dp));
+        }
+         dp[step]=res;
+           
+       }
+       return dp[0];
+  }
     int minimizeCost(vector<int>& height, int n, int k) {
         // Code here    
         vector<int>dp(n,-1);
         
-        return solve(height,0,n,k,dp);
+        // return solve(height,0,n,k,dp);
+        
+        return solveTab(height,n,k);
     }
 };
 
