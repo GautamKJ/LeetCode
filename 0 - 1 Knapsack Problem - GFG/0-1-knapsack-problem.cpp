@@ -23,6 +23,28 @@ class Solution
         
         return dp[n][W]= max(inc,exc);
     }
+    
+    int solveTab(int W, int wt[], int val[], int n)
+    {
+        vector<vector<int>>dp(n,vector<int>(W+1,0));
+        
+        for(int i=1;i<n;i++)
+        {
+            for(int w=0;w<=W;w++)
+            {
+                 int inc=0,exc=0;
+        
+                if(w-wt[i]>=0)
+                inc=val[i]+dp[w-wt[i]][i-1];
+                
+                exc=dp[w][i-1];
+                
+                 dp[i][w]= max(inc,exc);
+            }
+        }
+        
+        return dp[n-1][W];
+    }
     //Function to return max value that can be put in knapsack of capacity W.
     int knapSack(int W, int wt[], int val[], int n) 
     { 
