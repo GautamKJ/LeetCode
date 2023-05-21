@@ -25,11 +25,32 @@ class Solution{
         
         return dp[n][i]= max(inc,exc);
   }
+  
+  int solveTab(int price[], int n)
+  {
+         vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+         
+         for(int k=1;k<=n;k++)
+         {
+             for(int i=n-1;i>=0;i--)
+             {
+                  int inc=0,exc=0;
+                    if(k-i-1>=0)
+                    inc=price[i]+dp[k-i-1][i];
+                    exc=dp[k][i+1];
+        
+                dp[k][i]= max(inc,exc);
+             }
+         }
+         
+        return dp[n][0];
+  }
     int cutRod(int price[], int n) {
         
         vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
         
-        return solve(price,n,0,n,dp);
+        // return solve(price,n,0,n,dp);
+        return solveTab(price,n);
     }
 };
 
